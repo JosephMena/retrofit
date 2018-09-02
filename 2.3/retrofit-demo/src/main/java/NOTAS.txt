@@ -1,0 +1,56 @@
+Retrofit:
+-------
+
+	Retrofit es un cliente REST baasdo en HTTP para android y Java. Este framework hace relativamente
+	facil recuperar y subir JSON, entre otros tipos de formato. En retrofit se puede configurar
+	diversos tipos de Converters para ser usados al momento de la serializacion. Retrofit usa la libreria
+	OkHttp para las peticiones HTTP.
+
+
+	Para trabajar con retrofit basicamente se necesita 3 clases:
+	
+	1. Modelo, es la representacion de los datos enviados entre el servicio expuesto y el cliente.
+	2. Servicios, son donde se encuentran las operaciones que se ejecutaran contra el Servicio expuesto,
+	   estos servicios estan implementados por medio de Interfaces.
+	3. Retrofit.Builder.class, usada para configurar algunos detalles como la url endpoint del servicio a
+	   consumir.
+	   
+	Cada metodo de una interface representa una posible invocacion al servicio expuesto. Debe tener 
+	un anotacion HTTP (GET, POST, etc) para especificar el metodo http a usar. El valor de retorno
+	(return) esta envuelto en un objeto Call con el tipo de resultado esperado.
+	
+	Ejemplo:
+	
+	@GET("/ususario")
+	Call<List<Usuario>> getUsuarios()
+	
+	Puede usar bloques de reemplazo y query parameters para ajustar la URL.
+	
+	Ejemplo de bloques de reemplazo, en este caso actua de la mano con @Path:
+	
+	@GET("/usuario/{id}")
+	Call<List<Usuario>> getUsuario(@Path("id") String id)
+	
+	Ejemplo de Query parameter, en este caso recordemos con la url es por ej. /usuario?id=123:
+	
+	@GET("/usuario")
+	Call<List<Usuario>> getUsuario(@Query("id") String id)
+	
+	La anotacion @Body le dice a retrofit que el objeto pasado como parametro sera usado como 
+	body en el request de la invocacion.
+	
+	@POST("/usuario")
+	public void registrarUsuario(@Body Usuario usuario);
+	
+	
+	
+URLs:
+----
+
+	[1] - https://www.baeldung.com/retrofit
+	[2] - http://www.vogella.com/tutorials/Retrofit/article.html
+	
+	
+	
+	
+
